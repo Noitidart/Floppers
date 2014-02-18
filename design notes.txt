@@ -1,0 +1,27 @@
+how to tell if blocked:
+-if following someone, and they were following you back, but then they block you, they disappear from your "following" list
+--if they unblock you, they will not re-appear on your "following" list, you have to re-follow them
+-if someone is following you, and you are not following them back yet, and then you block them
+--on the person following you, there "following" page shows your name BUT after block they are removed from his "following" page
+--on unblock, the person who got unblocked and was following, does not refollow auto, the unblocked user has to manually refollow
+-if someone is not following you (wertogg) and you block them (rabitt0300), when they (rabitt0300) follow you:
+--you get message that "You have been blocked from following this account at the request of the user." and the person you tried to follow and who had you blocked (wertogg) is not informed that you tried to follow them
+-if account private (wertogg) and try to follow it sends them a request, but it doesnt notify them, so can cancel it and they will never know you tried to follow them, but thru this way you can figure out if you're blocked or not
+
+twitter: Folloppers
+fb: Frenemies
+g+: Uncirclers
+
+SQLite table:
+following_users - (no history here) user_id | time (used for checking if people blocked you) (if user is following someone and they dissapear, notify user they may have been blocked or the person may have deleted their aacount, put on watch list so can re-follow when avail [when re-enable acct] [also do test if they blocked user])
+follower_history - user_id | following (1 for followed, 0 for unfollowed) | time (on initial add of addon install add with time == 0 as dont know when really added)
+last_visit - time (holds data last visited the html page to view follow_history, so based on this date, can show unfollows since last visit) (hold multiple times so can group by visits)
+topic_history - tweet_id | favorited (1 for yes, 0 for not) | by_user_id | time (on initial add of addon install add with time == 0 as dont know when really added)
+blocked_users - (users i have blocked) user_id | time
+blocker_history - (users that blocked me) user_id | time
+
+
+ideas: Folloppers
+-based on follow_history can tell user which users he follows that are not following him back AND which users follow him that he is not following back
+-check the users that you follow and aren't following you back IF THEY BLOCKED YOU (do this by following them and testing if get error message) (users that you follow, and that  follow you back, are obviously not blocked) (however: users you follow and then they blocked you, they disappear from your follower list, so i need to make a db to track who you follow)
+-a table that contains a list users who i have blocked and buttons to unblock them
