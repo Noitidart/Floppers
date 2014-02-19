@@ -20,9 +20,10 @@
 		</em:targetApplication>
 
 		<!-- Front End MetaData -->
-		<em:name>Bootstrap Skeleton</em:name>
-		<em:description>Extension for Twitter</em:description>
+		<em:name>Floppers</em:name>
+		<em:description>Track all who unfollow and unfriend you.</em:description>
 		<em:creator>Noitidart</em:creator>
+		<em:contributor>Pat for Icon</em:contributor>
 		<em:optionsType>2</em:optionsType>
 	  </Description>
 	</RDF>

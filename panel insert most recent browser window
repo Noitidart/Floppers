@@ -1,0 +1,54 @@
+//var {classes: Cc, interfaces: Ci, utils: Cu} = Components;
+//Cu.import('resource://gre/modules/Services.jsm');
+
+var win = Services.wm.getMostRecentWindow('navigator:browser');
+var panel = win.document.createElement('panel');
+var props = {
+    noautohide: true,
+    noautofocus: false,
+    draggable: false, //even if true it doesnt drag, weird.
+    /*type: 'arrow',*/ //otherwise it gets all animated
+    style: 'padding:0; margin:0; background-color:black; width:320px; height:150px; -moz-appearance:none !important;'
+}
+for (var p in props) {
+    panel.setAttribute(p, props[p]);
+}
+
+
+
+var iframe = win.document.createElement('iframe');
+//iframe.setAttribute('type','chrome');
+iframe.setAttribute('style','border:1px solid black;margin:0;padding:0;width:100px;height:100px;background-color:springgreen;');
+var iframeOnLoad = function() {
+    iframe.removeEventListener('DOMContentLoaded', iframeOnLoad, false);
+    Cu.reportError('iframe loaded!!!')
+    
+    var iwin = iframe.contentWindow;
+    var idoc = iwin.document;
+    //iwin.alert('hi');
+    /*
+    iDocument.querySelector('#close').addEventListener('click',function() {
+        panel.parentNode.removeChild(panel);
+        //iWindow.alert('closing');
+    }, false);
+    */
+}
+//iframe.contentWindow.alert('as');
+iframe.addEventListener('DOMContentLoaded', iframeOnLoad, false);
+iframe.setAttribute('src', 'file:///C:/Users/ali57233/Documents/Unfollower/panels.htm');
+//iframe.setAttribute('src', 'http://www.bing.com/');
+
+
+panel.appendChild(iframe);
+
+panel.style.backgroundColor = 'transparent';
+panel.firstChild.style.backgroundColor = 'transparent';
+panel.firstChild.style.border = 0;
+panel.style.border = 0;
+
+
+win.document.querySelector('#mainPopupSet').appendChild(panel);
+
+
+
+panel.openPopup(null, 'overlap', 100, 100);
